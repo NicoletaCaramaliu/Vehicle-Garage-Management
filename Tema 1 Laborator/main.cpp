@@ -223,8 +223,8 @@ istream& operator>>(istream& in, Car& c1)
 }
 
 ostream& operator<<(ostream& out, const Car& c1) {
-    out<<c1.fabrication_year<<" "<< c1.model << " " << c1.price << " " <<c1.speed_per_hour<<
-    " "<<" "<< c1.colour<<" "<<c1.fuel_consumption<<" "<<c1.fuel_type<<" "<<c1.kilometres<<endl;
+    out<<"Fabrication year: "<<c1.fabrication_year<<endl<<" Model: "<< c1.model <<endl<< " Price: " << c1.price <<endl<< " Speed: " <<c1.speed_per_hour<<endl<<
+    " Colour: "<< c1.colour<<endl<<" Fuel consumption: "<<c1.fuel_consumption<<endl<<" Fuel type "<<c1.fuel_type<<endl<<" Kilometres "<<c1.kilometres<<endl;
     return out;
 }
 
@@ -275,6 +275,13 @@ int main() {
     Car c5;
     cin>>c5;
     cout<<c5;
-    ///abc
+    ///Citirea si afisarea a n obiecte
+    int n=7;
+    for(int i=1;i<=n;i++)
+    {
+        Car c;
+        cin>>c;
+        cout<<c;
+    }
 
 }
