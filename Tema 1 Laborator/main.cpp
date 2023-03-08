@@ -132,35 +132,35 @@ public:
     {
         kilometres=kilometres_;
     }
-    int getFabrication_year()
+    int getFabrication_year() const
     {
         return fabrication_year;
     }
-    const char* getModel()
+    const char* getModel() const
     {
         return model;
     }
-    double getPrice()
+    double getPrice() const
     {
         return price;
     }
-    int getSpeedPerHour()
+    int getSpeedPerHour() const
     {
         return speed_per_hour;
     }
-    const char* getColour()
+    const char* getColour() const
     {
         return colour;
     }
-    double getFuelConsumpion()
+    double getFuelConsumpion() const
     {
         return fuel_consumption;
     }
-    const char* getFuelType()
+    const char* getFuelType() const
     {
         return fuel_type;
     }
-    int getKilometers()
+    int getKilometers() const
     {
         return kilometres;
     }
@@ -203,6 +203,7 @@ public:
         return fabrication_year!=c.fabrication_year || strcmp(model,c.model)!=0 || price!=c.price
                || speed_per_hour!=c.speed_per_hour || strcmp(colour,c.colour)!=0 || fuel_consumption!=c.fuel_consumption
                || strcmp(fuel_type,c.fuel_type)!=0 || kilometres!=c.kilometres;
+        /// return !(*this==c)
     }
 
 
