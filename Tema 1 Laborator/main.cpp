@@ -282,6 +282,7 @@ int main() {
         Car c;
         cin>>c;
         cout<<c;
+        if(c.getFabrication_year()>=2020)cout<<c.getFabrication_year();
     }
 
 }
