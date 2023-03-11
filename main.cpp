@@ -308,7 +308,6 @@ public:
 
     void setFuelType2(const char* fuel_type2_)
     {
-        delete[] fuel_type2;
         size_t len=strlen(fuel_type2_);
         fuel_type2=new char[len+1];
         strcpy(fuel_type2,fuel_type2_);
