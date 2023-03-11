@@ -219,9 +219,30 @@ public:
 
 istream& operator>>(istream& in, Car& c1)
 {
+    int y;
+    in>>y;
+    c1.setFabricationYear(y);
+    char m[100];
+    in>>m;
+    c1.setModel(m);
     double x;
     in>>x;
     c1.setPrice(x);
+    int s;
+    in>>s;
+    c1.setSpeed(s);
+    char c[100];
+    in>>c;
+    c1.setColour(c);
+    double f;
+    in>>f;
+    c1.setFuelConsumption(f);
+    char ft[100];
+    in>>ft;
+    c1.setFuelType(ft);
+    int k;
+    in>>k;
+    c1.setKilometres(k);
     /*in>>c1.fabrication_year>> c1.getModel()>> c1.price>>c1.speed_per_hour>>
     c1.getColour()>>c1.fuel_consumption>>c1.getFuelType()>>c1.kilometres;*/
     return in;
@@ -233,10 +254,84 @@ ostream& operator<<(ostream& out, const Car& c1) {
     return out;
 }
 
+class Race
+{
+private:
+    int year_of_fabrication;
+    int speed_min;
+    char *fuel_type2;
+
+public:
+    ///constructor fara parametri
+    Race()
+    {
+        cout<<"S-a apelat constructorul fara parametri "<<endl;
+        year_of_fabrication=0;
+        speed_min=0;
+        fuel_type2=new char[strlen("Unknown")+1];
+        strcpy(fuel_type2,"Unknown");
+    }
+
+    /// constructor cu parametri
+    Race(int year_of_fabrication_, int speed_min_,const char* fuel_type2_)
+    {
+        cout<<"S-a apelat constructorul cu parametri "<<endl;
+        year_of_fabrication=year_of_fabrication_;
+        speed_min=speed_min_;
+        size_t len2 = strlen(fuel_type2_);
+        fuel_type2 = new char[len2 + 1];
+        strcpy(fuel_type2, fuel_type2_);
+
+    }
+    ///Destructori
+    ~Race() {
+        delete[] fuel_type2;
+    }
+
+    Race(const Race &ob)  ///copy constructor
+    {
+        cout<<"S-a apelat constructorul de copiere "<<endl;
+        year_of_fabrication=ob.year_of_fabrication;
+        speed_min=ob.speed_min;
+        size_t len2 = strlen(ob.fuel_type2);
+        fuel_type2 = new char[len2 + 1];
+        strcpy(fuel_type2, ob.fuel_type2);
+    }
+    void setYear(const double year_)
+    {
+        year_of_fabrication=year_;
+    }
+    void setSpeed(const int speed2_)
+    {
+        speed_min=speed2_;
+    }
+
+    void setFuelType2(const char* fuel_type2_)
+    {
+        delete[] fuel_type2;
+        size_t len=strlen(fuel_type2_);
+        fuel_type2=new char[len+1];
+        strcpy(fuel_type2,fuel_type2_);
+    }
+
+    int getYear() const
+    {
+        return year_of_fabrication;
+    }
+    int getSpeedMin() const
+    {
+        return speed_min;
+    }
+    const char* getFuelType2() const
+    {
+        return fuel_type2;
+    }
+
+};
 
 
 int main() {
-  /*  Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
+    Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     c1.afisare();
     cout<<endl;
     Car c2(c1);
@@ -280,5 +375,5 @@ int main() {
     cout<<c4<<endl;
     Car c5;
     cin>>c5;
-    cout<<c5;*/
+    cout<<c5;
 }
