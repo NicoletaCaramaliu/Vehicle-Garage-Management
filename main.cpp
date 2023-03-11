@@ -18,7 +18,7 @@ public:
     ///constructor fara parametri
     Car()
     {
-        cout<<"S-a apelat constructorul fara parametri "<<endl;
+        ///cout<<"S-a apelat constructorul fara parametri "<<endl;
         fabrication_year=0;
         model=new char[strlen("Unknown")+1];
         strcpy(model,"Unknown");
@@ -35,7 +35,7 @@ public:
     /// constructor cu parametri
     Car(int fabrication_year_, const char* model_, double price_, int speed_per_hour_,const char* colour_,double fuel_consumpion_, const char* fuel_type_, int kilometers_)
     {
-        cout<<"S-a apelat constructorul cu parametri "<<endl;
+       ///cout<<"S-a apelat constructorul cu parametri "<<endl;
         fabrication_year=fabrication_year_;
         size_t len = strlen(model_);
         model = new char[len + 1];
@@ -60,7 +60,7 @@ public:
 
     Car(const Car &ob)  ///copy constructor
     {
-        cout<<"S-a apelat constructorul de copiere "<<endl;
+       /// cout<<"S-a apelat constructorul de copiere "<<endl;
         fabrication_year=ob.fabrication_year;
         size_t len = strlen(ob.model);
         model = new char[len + 1];
@@ -175,9 +175,7 @@ public:
     ///operatorul =
     Car& operator =(const Car &rhs)
     {
-        delete[] model;
-        delete[] colour;
-        delete[] fuel_type;
+
         if (this != &rhs){
         cout<<"S-a apelat operatorul ="<<endl;
         this->fabrication_year=rhs.fabrication_year;
@@ -340,13 +338,9 @@ public:
 };
 
 
-
-
 void cursa()
 {
-    Car m1;
-    cout<<"Citim specificatiile masinii: "<<endl;
-    cin>>m1;
+    Car m1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     Race r1(2020,250,"diesel");
     if (m1.getFabrication_year()>=r1.getYear()&&m1.getSpeedPerHour()>=r1.getSpeedMin()&&strcmp(m1.getFuelType(),r1.getFuelType2())==0)cout<<"Masina poate participa la cursa"<<endl;
     else cout<<"Masina nu detine dotarile necesare"<<endl;
@@ -354,9 +348,7 @@ void cursa()
 
 void cumparare()
 {
-    Car m1;
-    cout<<"Citim specificatiile masinii pe care cumparatorul o inspecteaza: "<<endl;
-    cin>>m1;
+    Car m1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     cout<<"Cerintele cumparatorului sunt: "<<endl;
     cout<<"1. Masina sa nu aiba anul de aparitie inainte de 2017"<<endl<<"2.Masina sa functioneze cu motorina"<<endl
         <<"3.Masina sa nu depaseasca 20000 euro"<<endl<<"4.Masina sa fie neagra"<<endl;
@@ -367,6 +359,7 @@ void cumparare()
 }
 
 int main() {
+
     Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     c1.afisare();
     cout<<endl;
@@ -404,11 +397,6 @@ int main() {
     c4.afisare();cout<<endl;
     cout<<(c4==c3)<<endl;
     c4=c3;
-    cout<<(c4==c3)<<endl;
-    cout<<(c4!=c3)<<endl;
-    c4=c2;
-    cout<<(c4!=c3)<<endl;
-    cout<<c4<<endl;
 
     Race r1(2020,300,"diesel");
     r1.getFuelType2();
@@ -423,10 +411,10 @@ int main() {
     do {
         cout<<"1.Verificam daca masina poate participa la cursa"<<endl;
         cout<<"2.Verificam daca masina se inadreaza in cerintele unui cumparator"<<endl;
-        cin>>x;
+        x=1;
         if(x==1)
-            cursa();
+        {cursa(); x=2;}
         if(x==2)
-            cumparare();
+        {cumparare();x=3;}
     }while(x==1 || x==2);
 }
