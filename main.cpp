@@ -219,8 +219,11 @@ public:
 
 istream& operator>>(istream& in, Car& c1)
 {
-    in>>c1.fabrication_year>> c1.getModel()>> c1.price>>c1.speed_per_hour>>
-    c1.getColour()>>c1.fuel_consumption>>c1.getFuelType()>>c1.kilometres;
+    double x;
+    in>>x;
+    c1.setPrice(x);
+    /*in>>c1.fabrication_year>> c1.getModel()>> c1.price>>c1.speed_per_hour>>
+    c1.getColour()>>c1.fuel_consumption>>c1.getFuelType()>>c1.kilometres;*/
     return in;
 }
 
