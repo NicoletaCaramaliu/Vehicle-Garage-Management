@@ -96,6 +96,7 @@ public:
     }
     void setModel(const char* model_)
     {
+        delete[] model;
         size_t len=strlen(model_);
         model=new char[len+1];
         strcpy(model,model_);
@@ -111,6 +112,7 @@ public:
 
     void setColour(const char* colour_)
     {
+        delete[] colour;
         size_t len=strlen(colour_);
         colour=new char[len+1];
         strcpy(colour,colour_);
@@ -121,6 +123,7 @@ public:
     }
     void setFuelType(const char* fuel_type_)
     {
+        delete[] fuel_type;
         size_t len=strlen(fuel_type_);
         fuel_type=new char[len+1];
         strcpy(fuel_type,fuel_type_);
@@ -175,29 +178,30 @@ public:
         delete[] model;
         delete[] colour;
         delete[] fuel_type;
+        if (this != &rhs){
         cout<<"S-a apelat operatorul ="<<endl;
-        fabrication_year=rhs.fabrication_year;
-        setModel(rhs.model);
-        price=rhs.price;
-        speed_per_hour=rhs.speed_per_hour;
-        setColour(rhs.colour);
-        fuel_consumption=rhs.fuel_consumption;
-        setFuelType(rhs.fuel_type);
-        kilometres=rhs.kilometres;
+        this->fabrication_year=rhs.fabrication_year;
+        if (this != &rhs)setModel(rhs.model);
+        this->price=rhs.price;
+        this->speed_per_hour=rhs.speed_per_hour;
+        if (this != &rhs) setColour(rhs.colour);
+        this->fuel_consumption=rhs.fuel_consumption;
+        if (this != &rhs) setFuelType(rhs.fuel_type);
+        this->kilometres=rhs.kilometres;}
 
         return *this;
     }
 
     ///Operatorii == si !=
 
-    bool operator ==(const Car &c)
+    bool operator ==(const Car &c) const
     {
         return fabrication_year==c.fabrication_year && strcmp(model,c.getModel())==0 && price==c.price
         && speed_per_hour==c.speed_per_hour && strcmp(colour,c.getColour())==0 && fuel_consumption==c.fuel_consumption
         && strcmp(fuel_type,c.getFuelType())==0 && kilometres==c.kilometres;
     }
 
-    bool operator !=(const Car &c)
+    bool operator !=(const Car &c) const
     {
         return fabrication_year!=c.fabrication_year || strcmp(model,c.getModel())!=0 || price!=c.price
                || speed_per_hour!=c.speed_per_hour || strcmp(colour,c.colour)!=0 || fuel_consumption!=c.fuel_consumption
