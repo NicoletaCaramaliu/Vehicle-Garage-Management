@@ -373,9 +373,7 @@ int main() {
     c4=c2;
     cout<<(c4!=c3)<<endl;
     cout<<c4<<endl;
-    Car c5;
-    cin>>c5;
-    cout<<c5;
+   
 
     Race r1(2020,300,"diesel");
     r1.getFuelType2();
