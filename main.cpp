@@ -373,7 +373,16 @@ int main() {
     c4=c2;
     cout<<(c4!=c3)<<endl;
     cout<<c4<<endl;
-    /*Car c5;
+    Car c5;
     cin>>c5;
-    cout<<c5;*/
+    cout<<c5;
+
+    Race r1(2020,300,"diesel");
+    r1.getFuelType2();
+    r1.getSpeedMin();
+    r1.getYear();
+    Race r2;
+    r2.setSpeed(370);
+    r2.setFuelType2("gasoline");
+    r2.setYear(2022);
 }
