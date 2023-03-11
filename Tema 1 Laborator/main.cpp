@@ -228,7 +228,80 @@ ostream& operator<<(ostream& out, const Car& c1) {
     return out;
 }
 
+class Race
+{
+private:
+    int year_of_fabrication;
+    int speed_min;
+    char *fuel_type2;
 
+public:
+    ///constructor fara parametri
+    Race()
+    {
+        cout<<"S-a apelat constructorul fara parametri "<<endl;
+        year_of_fabrication=0;
+        speed_min=0;
+        fuel_type2=new char[strlen("Unknown")+1];
+        strcpy(fuel_type2,"Unknown");
+    }
+
+    /// constructor cu parametri
+    Race(int year_of_fabrication_, int speed_min_,const char* fuel_type2_)
+    {
+        cout<<"S-a apelat constructorul cu parametri "<<endl;
+        year_of_fabrication=year_of_fabrication_;
+        speed_min=speed_min_;
+        size_t len2 = strlen(fuel_type2_);
+        fuel_type2 = new char[len2 + 1];
+        strcpy(fuel_type2, fuel_type2_);
+
+    }
+    ///Destructori
+    ~Race() {
+        delete[] fuel_type2;
+    }
+
+    Race(const Race &ob)  ///copy constructor
+    {
+        cout<<"S-a apelat constructorul de copiere "<<endl;
+        year_of_fabrication=ob.year_of_fabrication;
+        speed_min=ob.speed_min;
+        size_t len2 = strlen(ob.fuel_type2);
+        fuel_type2 = new char[len2 + 1];
+        strcpy(fuel_type2, ob.fuel_type2);
+    }
+    void setYear(const double year_)
+    {
+        year_of_fabrication=year_;
+    }
+    void setSpeed(const int speed2_)
+    {
+        speed_min=speed2_;
+    }
+
+    void setFuelType2(const char* fuel_type2_)
+    {
+        delete[] fuel_type2;
+        size_t len=strlen(fuel_type2_);
+        fuel_type2=new char[len+1];
+        strcpy(fuel_type2,fuel_type2_);
+    }
+
+    int getYear() const
+    {
+        return year_of_fabrication;
+    }
+    int getSpeedMin() const
+    {
+        return speed_min;
+    }
+    const char* getFuelType2() const
+    {
+        return fuel_type2;
+    }
+
+};
 int main() {
     Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     c1.afisare();
@@ -284,5 +357,5 @@ int main() {
         cout<<c;
         if(c.getFabrication_year()>=2020)cout<<c.getFabrication_year();
     }
-
+    cout<<"Verificam daca masina unei persoane poate fi vanduta";
 }
