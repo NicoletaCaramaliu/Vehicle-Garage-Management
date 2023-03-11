@@ -408,10 +408,10 @@ int main() {
     r2.setYear(2022);
 
     int x;
+    x=1;
     do {
         cout<<"1.Verificam daca masina poate participa la cursa"<<endl;
         cout<<"2.Verificam daca masina se inadreaza in cerintele unui cumparator"<<endl;
-        x=1;
         if(x==1)
         {cursa(); x=2;}
         if(x==2)
