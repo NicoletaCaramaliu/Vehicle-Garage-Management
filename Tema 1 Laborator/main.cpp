@@ -18,7 +18,6 @@ public:
     ///constructor fara parametri
     Car()
     {
-        cout<<"S-a apelat constructorul fara parametri "<<endl;
         fabrication_year=0;
         model=new char[strlen("Unknown")+1];
         strcpy(model,"Unknown");
@@ -302,6 +301,30 @@ public:
     }
 
 };
+
+void cursa()
+{
+    Car m1;
+    cout<<"Citim specificatiile masinii: "<<endl;
+    cin>>m1;
+    Race r1(2020,250,"diesel");
+    if (m1.getFabrication_year()>=r1.getYear()&&m1.getSpeedPerHour()>=r1.getSpeedMin()&&strcmp(m1.getFuelType(),r1.getFuelType2())==0)cout<<"Masina poate participa la cursa"<<endl;
+    else cout<<"Masina nu detine dotarile necesare"<<endl;
+}
+
+void cumparare()
+{
+    Car m1;
+    cout<<"Citim specificatiile masinii pe care cumparatorul o inspecteaza: "<<endl;
+    cin>>m1;
+    cout<<"Cerintele cumparatorului sunt: "<<endl;
+    cout<<"1. Masina sa nu aiba anul de aparitie inainte de 2017"<<endl<<"2.Masina sa functioneze cu motorina"<<endl
+    <<"3.Masina sa nu depaseasca 20000 euro"<<endl<<"4.Masina sa fie neagra"<<endl;
+    if(m1.getFabrication_year()>=2017&&strcmp(m1.getFuelType(),"diesel")==0&&m1.getPrice()<=20000&&strcmp(m1.getColour(),"negru")==0)
+        cout<<"Masina respecta cerintele cumparatorului si aceasta o poate cumpara"<<endl;
+    else
+        cout<<"Masina nu este ceea ce cumparatorul isi doreste"<<endl<<endl;
+}
 int main() {
     Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     c1.afisare();
@@ -345,7 +368,7 @@ int main() {
     c4=c2;
     cout<<(c4!=c3)<<endl;
     cout<<c4<<endl;
-    Car c5;
+    /*Car c5;
     cin>>c5;
     cout<<c5;
     ///Citirea si afisarea a n obiecte
@@ -357,5 +380,18 @@ int main() {
         cout<<c;
         if(c.getFabrication_year()>=2020)cout<<c.getFabrication_year();
     }
-    cout<<"Verificam daca masina unei persoane poate fi vanduta";
+    */
+
+    ///Verificam daca o masina poate participa la o cursa
+    ///Verificam daca o masina se inadreaza in cerintele unui cumparator
+    int x;
+    do {
+        cout<<"1.Verificam daca masina poate participa la cursa"<<endl;
+        cout<<"2.Verificam daca masina se inadreaza in cerintele unui cumparator"<<endl;
+        cin>>x;
+        if(x==1)
+            cursa();
+        if(x==2)
+           cumparare();
+    }while(x==1 || x==2);
 }
