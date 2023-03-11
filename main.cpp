@@ -129,35 +129,32 @@ public:
     {
         kilometres=kilometres_;
     }
-    const int getFabrication_year()
-    {
-        return fabrication_year;
-    }
+    int getFabrication_year() const;
     const char* getModel()
     {
         return model;
     }
-    const double getPrice()
+    double getPrice() const
     {
         return price;
     }
-    const int getSpeedPerHour()
+    int getSpeedPerHour() const
     {
         return speed_per_hour;
     }
-    const char* getColour()
+    const char* getColour() const
     {
         return colour;
     }
-    const double getFuelConsumpion()
+    double getFuelConsumpion() const
     {
         return fuel_consumption;
     }
-    const char* getFuelType()
+    const char* getFuelType() const
     {
         return fuel_type;
     }
-    const int getKilometers()
+    int getKilometers() const
     {
         return kilometres;
     }
@@ -226,9 +223,14 @@ ostream& operator<<(ostream& out, const Car& c1) {
     return out;
 }
 
+int Car::getFabrication_year() const {
+    return fabrication_year;
+}
+
+
 
 int main() {
-    Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
+  /*  Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     c1.afisare();
     cout<<endl;
     Car c2(c1);
@@ -272,6 +274,5 @@ int main() {
     cout<<c4<<endl;
     Car c5;
     cin>>c5;
-    cout<<c5;
+    cout<<c5;*/
 }
-
