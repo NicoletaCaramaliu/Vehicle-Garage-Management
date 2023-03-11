@@ -192,16 +192,16 @@ public:
 
     bool operator ==(const Car &c)
     {
-        return fabrication_year==c.fabrication_year && strcmp(model,c.model)==0 && price==c.price
-        && speed_per_hour==c.speed_per_hour && strcmp(colour,c.colour)==0 && fuel_consumption==c.fuel_consumption
-        && strcmp(fuel_type,c.fuel_type)==0 && kilometres==c.kilometres;
+        return fabrication_year==c.fabrication_year && strcmp(model,c.getModel())==0 && price==c.price
+        && speed_per_hour==c.speed_per_hour && strcmp(colour,c.getColour())==0 && fuel_consumption==c.fuel_consumption
+        && strcmp(fuel_type,c.getFuelType())==0 && kilometres==c.kilometres;
     }
 
     bool operator !=(const Car &c)
     {
-        return fabrication_year!=c.fabrication_year || strcmp(model,c.model)!=0 || price!=c.price
+        return fabrication_year!=c.fabrication_year || strcmp(model,c.getModel())!=0 || price!=c.price
                || speed_per_hour!=c.speed_per_hour || strcmp(colour,c.colour)!=0 || fuel_consumption!=c.fuel_consumption
-               || strcmp(fuel_type,c.fuel_type)!=0 || kilometres!=c.kilometres;
+               || strcmp(fuel_type,c.getFuelType())!=0 || kilometres!=c.kilometres;
     }
 
 
