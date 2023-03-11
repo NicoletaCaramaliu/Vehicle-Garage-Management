@@ -212,14 +212,14 @@ public:
 
 istream& operator>>(istream& in, Car& c1)
 {
-    in>>c1.fabrication_year>> c1.model>> c1.price>>c1.speed_per_hour>>
-    c1.colour>>c1.fuel_consumption>>c1.fuel_type>>c1.kilometres;
+    in>>c1.fabrication_year>> c1.getModel()>> c1.price>>c1.speed_per_hour>>
+    c1.getColour()>>c1.fuel_consumption>>c1.getFuelType()>>c1.kilometres;
     return in;
 }
 
 ostream& operator<<(ostream& out, const Car& c1) {
-    out<<c1.fabrication_year<<" "<< c1.model << " " << c1.price << " " <<c1.speed_per_hour<<
-    " "<<" "<< c1.colour<<" "<<c1.fuel_consumption<<" "<<c1.fuel_type<<" "<<c1.kilometres<<endl;
+    out<<c1.fabrication_year<<" "<< c1.getModel()<< " " << c1.price << " " <<c1.speed_per_hour<<
+    " "<<" "<< c1.getColour()<<" "<<c1.fuel_consumption<<" "<<c1.getFuelType()<<" "<<c1.kilometres<<endl;
     return out;
 }
 
