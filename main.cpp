@@ -141,85 +141,82 @@ int main() {
    /* Garage::ShowAllVehicles();
     Garage::ShowAllBrokenCars();
     Garage::ShowAllBuses();*/
+    int o=1;
+    do {
+        cout
+                << "Bine ati venit!\n Acesta este un garaj destinat masinilor, autobuzelor si camioanelor.\nIn garaj putem intorduce doar masinile intr-o stare de functionare buna"
+                << ", autobuzele fara pasageri si camioanele fara marfa. \n Puteti accesa mai multe date ale garajului, precum si ce se afla in afara lui, cum ar fi:\n"
+                << "1) Toate vehiculele din garaj\n2)Toate masinile din garaj\n3)Toate masinile stricate\n4)Autobuzele din garaj\n"
+                << "5)Autobuzele care se afla pe traseu\n6)Camioanele din garaj\n7)Camioanele cu marfa\n8)Adaugati propria masina\n";
 
-    start:
-    cout<<"Bine ati venit!\n Acesta este un garaj destinat masinilor, autobuzelor si camioanelor.\nIn garaj putem intorduce doar masinile intr-o stare de functionare buna"
-         << ", autobuzele fara pasageri si camioanele fara marfa. \n Puteti accesa mai multe date ale garajului, precum si ce se afla in afara lui, cum ar fi:\n"
-            <<"1) Toate vehiculele din garaj\n2)Toate masinile din garaj\n3)Toate masinile stricate\n4)Autobuzele din garaj\n"
-              <<"5)Autobuzele care se afla pe traseu\n6)Camioanele din garaj\n7)Camioanele cu marfa\n8)Adaugati propria masina\n";
-
-    int n;
-    cout<<"Introduceti optiunea:\n";
-    cin>>n;
-    switch (n) {
-        case 1:
-        {cout<<"Vehiculele care se afla in garaj sunt in numar de: "<<current_nr<<"\n\n";
-            Garage::ShowAllVehicles();
-            break;}
-        case 2:
-        { cout<<"Masinile care se afla in garaj sunt:\n\n";
-            Garage::ShowAllCars();
-            break;}
-        case 3:
-        {
-            cout<<"Masinile stricate sunt:\n\n";
-            Garage::ShowAllBrokenCars();
-            break;
-        }
-        case 4:
-        {
-            cout<<"Autobuzele din garaj sunt:\n\n";
-            Garage::ShowAllBuses();
-            break;
-        }
-        case 5:
-        {
-            cout<<"Autobuzele care se afla pe traseu sunt:\n\n";
-            Garage::ShowOnRoadBuses();
-            break;
-        }
-        case 6:
-        {
-            cout<<"Camioanele din garaj sunt: \n";
-            Garage::ShowAllTrucks();
-            break;
-        }
-        case 7:
-        {
-            cout<<"Camioanele incarcate sunt: \n";
-            Garage::ShowLoadedTrucks();
-            break;
-        }
-        case 8:
-        {
-            if(current_nr<garageCapacity)
-            {
-                Car* c = Garage::AddOwnCar(shared_ptr<Car>());
-                if (c != nullptr) {
-                    current_nr++;
-                    auto newCar = make_shared<Car>(c->getFabrication_year(), c->getModel(), c->getPrice(), c->getColour(), c->getFuelConsumption(),
-                                                   c->getFuelType(), c->getKilometres(), c->getNav(), c->getCondition());
-
-                    Garage::AddVehicle(newCar);
-                cout<<"Masina dumneavoastra a fost adaugata cu succes. Va asteptam cat mai curand sa o aduceti la garajul nostru.\nDupa 2 zile rezervarea va fi amanata\n";}
-
-                else {cout<<"Datele introduse nu sunt corecte\n"; break;}
+        int n;
+        cout << "Introduceti optiunea:\n";
+        cin >> n;
+        switch (n) {
+            case 1: {
+                cout << "Vehiculele care se afla in garaj sunt in numar de: " << current_nr << "\n\n";
+                Garage::ShowAllVehicles();
+                break;
             }
-            else cout<<"Nu mai exista loc in garaj\n";
-            break;
-        }
-        default:
-        {
-            cout<<"Multumim de vizionare! Va mai asteptam\n";
-            return 0;
-        }
-    }
+            case 2: {
+                cout << "Masinile care se afla in garaj sunt:\n\n";
+                Garage::ShowAllCars();
+                break;
+            }
+            case 3: {
+                cout << "Masinile stricate sunt:\n\n";
+                Garage::ShowAllBrokenCars();
+                break;
+            }
+            case 4: {
+                cout << "Autobuzele din garaj sunt:\n\n";
+                Garage::ShowAllBuses();
+                break;
+            }
+            case 5: {
+                cout << "Autobuzele care se afla pe traseu sunt:\n\n";
+                Garage::ShowOnRoadBuses();
+                break;
+            }
+            case 6: {
+                cout << "Camioanele din garaj sunt: \n";
+                Garage::ShowAllTrucks();
+                break;
+            }
+            case 7: {
+                cout << "Camioanele incarcate sunt: \n";
+                Garage::ShowLoadedTrucks();
+                break;
+            }
+            case 8: {
+                if (current_nr < garageCapacity) {
+                    Car *c = Garage::AddOwnCar(shared_ptr<Car>());
+                    if (c != nullptr) {
+                        current_nr++;
+                        auto newCar = make_shared<Car>(c->getFabrication_year(), c->getModel(), c->getPrice(),
+                                                       c->getColour(), c->getFuelConsumption(),
+                                                       c->getFuelType(), c->getKilometres(), c->getNav(),
+                                                       c->getCondition());
 
-    cout<<"Doriti sa continuati sa vizualizati datele despre vehicule?\n1)DA\n2)NU\n";
-    int o;
-    cin>>o;
-    if(o==1)goto start;
-    else cout<<"Multumim de vizionare! Va mai asteptam\n";
+                        Garage::AddVehicle(newCar);
+                        cout
+                                << "Masina dumneavoastra a fost adaugata cu succes. Va asteptam cat mai curand sa o aduceti la garajul nostru.\nDupa 2 zile rezervarea va fi amanata\n";
+                    } else {
+                        cout << "Datele introduse nu sunt corecte\n";
+                        break;
+                    }
+                } else cout << "Nu mai exista loc in garaj\n";
+                break;
+            }
+            default: {
+                cout << "Multumim de vizionare! Va mai asteptam\n";
+                return 0;
+            }
+        }
 
+        cout << "Doriti sa continuati sa vizualizati datele despre vehicule?\n1)DA\n2)NU\n";
+        cin >> o;
+        if(o==2) cout << "Multumim de vizionare! Va mai asteptam\n";
+    } while (o==1);
     return 0;
 }
