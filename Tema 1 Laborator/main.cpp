@@ -18,6 +18,7 @@ public:
     ///constructor fara parametri
     Car()
     {
+        ///cout<<"S-a apelat constructorul fara parametri "<<endl;
         fabrication_year=0;
         model=new char[strlen("Unknown")+1];
         strcpy(model,"Unknown");
@@ -34,7 +35,7 @@ public:
     /// constructor cu parametri
     Car(int fabrication_year_, const char* model_, double price_, int speed_per_hour_,const char* colour_,double fuel_consumpion_, const char* fuel_type_, int kilometers_)
     {
-        cout<<"S-a apelat constructorul cu parametri "<<endl;
+       ///cout<<"S-a apelat constructorul cu parametri "<<endl;
         fabrication_year=fabrication_year_;
         size_t len = strlen(model_);
         model = new char[len + 1];
@@ -59,7 +60,7 @@ public:
 
     Car(const Car &ob)  ///copy constructor
     {
-        cout<<"S-a apelat constructorul de copiere "<<endl;
+       /// cout<<"S-a apelat constructorul de copiere "<<endl;
         fabrication_year=ob.fabrication_year;
         size_t len = strlen(ob.model);
         model = new char[len + 1];
@@ -135,7 +136,7 @@ public:
     {
         return fabrication_year;
     }
-    const char* getModel() const
+    char* getModel() const
     {
         return model;
     }
@@ -147,7 +148,7 @@ public:
     {
         return speed_per_hour;
     }
-    const char* getColour() const
+    char* getColour() const
     {
         return colour;
     }
@@ -155,7 +156,7 @@ public:
     {
         return fuel_consumption;
     }
-    const char* getFuelType() const
+    char* getFuelType() const
     {
         return fuel_type;
     }
@@ -175,34 +176,34 @@ public:
     Car& operator =(const Car &rhs)
     {
 
+        if (this != &rhs){
         cout<<"S-a apelat operatorul ="<<endl;
-        fabrication_year=rhs.fabrication_year;
-        setModel(rhs.model);
-        price=rhs.price;
-        speed_per_hour=rhs.speed_per_hour;
-        setColour(rhs.colour);
-        fuel_consumption=rhs.fuel_consumption;
-        setFuelType(rhs.fuel_type);
-        kilometres=rhs.kilometres;
+        this->fabrication_year=rhs.fabrication_year;
+        if (this != &rhs)setModel(rhs.model);
+        this->price=rhs.price;
+        this->speed_per_hour=rhs.speed_per_hour;
+        if (this != &rhs) setColour(rhs.colour);
+        this->fuel_consumption=rhs.fuel_consumption;
+        if (this != &rhs) setFuelType(rhs.fuel_type);
+        this->kilometres=rhs.kilometres;}
 
         return *this;
     }
 
     ///Operatorii == si !=
 
-    bool operator ==(const Car &c)
+    bool operator ==(const Car &c) const
     {
-        return fabrication_year==c.fabrication_year && strcmp(model,c.model)==0 && price==c.price
-        && speed_per_hour==c.speed_per_hour && strcmp(colour,c.colour)==0 && fuel_consumption==c.fuel_consumption
-        && strcmp(fuel_type,c.fuel_type)==0 && kilometres==c.kilometres;
+        return fabrication_year==c.fabrication_year && strcmp(model,c.getModel())==0 && price==c.price
+        && speed_per_hour==c.speed_per_hour && strcmp(colour,c.getColour())==0 && fuel_consumption==c.fuel_consumption
+        && strcmp(fuel_type,c.getFuelType())==0 && kilometres==c.kilometres;
     }
 
-    bool operator !=(const Car &c)
+    bool operator !=(const Car &c) const
     {
-        return fabrication_year!=c.fabrication_year || strcmp(model,c.model)!=0 || price!=c.price
+        return fabrication_year!=c.fabrication_year || strcmp(model,c.getModel())!=0 || price!=c.price
                || speed_per_hour!=c.speed_per_hour || strcmp(colour,c.colour)!=0 || fuel_consumption!=c.fuel_consumption
-               || strcmp(fuel_type,c.fuel_type)!=0 || kilometres!=c.kilometres;
-        /// return !(*this==c)
+               || strcmp(fuel_type,c.getFuelType())!=0 || kilometres!=c.kilometres;
     }
 
 
@@ -216,14 +217,38 @@ public:
 
 istream& operator>>(istream& in, Car& c1)
 {
-    in>>c1.fabrication_year>> c1.model>> c1.price>>c1.speed_per_hour>>
-    c1.colour>>c1.fuel_consumption>>c1.fuel_type>>c1.kilometres;
+    int y;
+    in>>y;
+    c1.setFabricationYear(y);
+    char m[100];
+    in>>m;
+    c1.setModel(m);
+    double x;
+    in>>x;
+    c1.setPrice(x);
+    int s;
+    in>>s;
+    c1.setSpeed(s);
+    char c[100];
+    in>>c;
+    c1.setColour(c);
+    double f;
+    in>>f;
+    c1.setFuelConsumption(f);
+    char ft[100];
+    in>>ft;
+    c1.setFuelType(ft);
+    int k;
+    in>>k;
+    c1.setKilometres(k);
+    /*in>>c1.fabrication_year>> c1.getModel()>> c1.price>>c1.speed_per_hour>>
+    c1.getColour()>>c1.fuel_consumption>>c1.getFuelType()>>c1.kilometres;*/
     return in;
 }
 
 ostream& operator<<(ostream& out, const Car& c1) {
-    out<<"Fabrication year: "<<c1.fabrication_year<<endl<<" Model: "<< c1.model <<endl<< " Price: " << c1.price <<endl<< " Speed: " <<c1.speed_per_hour<<endl<<
-    " Colour: "<< c1.colour<<endl<<" Fuel consumption: "<<c1.fuel_consumption<<endl<<" Fuel type "<<c1.fuel_type<<endl<<" Kilometres "<<c1.kilometres<<endl;
+    out<<c1.fabrication_year<<" "<< c1.getModel()<< " " << c1.price << " " <<c1.speed_per_hour<<
+    " "<<" "<< c1.getColour()<<" "<<c1.fuel_consumption<<" "<<c1.getFuelType()<<" "<<c1.kilometres<<endl;
     return out;
 }
 
@@ -281,7 +306,6 @@ public:
 
     void setFuelType2(const char* fuel_type2_)
     {
-        delete[] fuel_type2;
         size_t len=strlen(fuel_type2_);
         fuel_type2=new char[len+1];
         strcpy(fuel_type2,fuel_type2_);
@@ -299,14 +323,24 @@ public:
     {
         return fuel_type2;
     }
+    Race& operator =(const Race &rhs)
+    {
+        delete[] fuel_type2;
+        if (this != &rhs) {
+            cout << "S-a apelat operatorul =" << endl;
+            this->year_of_fabrication = rhs.year_of_fabrication;
+            if (this != &rhs)setFuelType2(rhs.fuel_type2);
+            this->speed_min = rhs.speed_min;
+        }
 
+        return *this;
+    }
 };
+
 
 void cursa()
 {
-    Car m1;
-    cout<<"Citim specificatiile masinii: "<<endl;
-    cin>>m1;
+    Car m1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     Race r1(2020,250,"diesel");
     if (m1.getFabrication_year()>=r1.getYear()&&m1.getSpeedPerHour()>=r1.getSpeedMin()&&strcmp(m1.getFuelType(),r1.getFuelType2())==0)cout<<"Masina poate participa la cursa"<<endl;
     else cout<<"Masina nu detine dotarile necesare"<<endl;
@@ -314,18 +348,18 @@ void cursa()
 
 void cumparare()
 {
-    Car m1;
-    cout<<"Citim specificatiile masinii pe care cumparatorul o inspecteaza: "<<endl;
-    cin>>m1;
+    Car m1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     cout<<"Cerintele cumparatorului sunt: "<<endl;
     cout<<"1. Masina sa nu aiba anul de aparitie inainte de 2017"<<endl<<"2.Masina sa functioneze cu motorina"<<endl
-    <<"3.Masina sa nu depaseasca 20000 euro"<<endl<<"4.Masina sa fie neagra"<<endl;
+        <<"3.Masina sa nu depaseasca 20000 euro"<<endl<<"4.Masina sa fie neagra"<<endl;
     if(m1.getFabrication_year()>=2017&&strcmp(m1.getFuelType(),"diesel")==0&&m1.getPrice()<=20000&&strcmp(m1.getColour(),"negru")==0)
         cout<<"Masina respecta cerintele cumparatorului si aceasta o poate cumpara"<<endl;
     else
         cout<<"Masina nu este ceea ce cumparatorul isi doreste"<<endl<<endl;
 }
+
 int main() {
+
     Car c1(2012,"BMW",12000,300,"blue",7.3,"diesel",120000);
     c1.afisare();
     cout<<endl;
@@ -363,35 +397,24 @@ int main() {
     c4.afisare();cout<<endl;
     cout<<(c4==c3)<<endl;
     c4=c3;
-    cout<<(c4==c3)<<endl;
-    cout<<(c4!=c3)<<endl;
-    c4=c2;
-    cout<<(c4!=c3)<<endl;
-    cout<<c4<<endl;
-    /*Car c5;
-    cin>>c5;
-    cout<<c5;
-    ///Citirea si afisarea a n obiecte
-    int n=7;
-    for(int i=1;i<=n;i++)
-    {
-        Car c;
-        cin>>c;
-        cout<<c;
-        if(c.getFabrication_year()>=2020)cout<<c.getFabrication_year();
-    }
-    */
 
-    ///Verificam daca o masina poate participa la o cursa
-    ///Verificam daca o masina se inadreaza in cerintele unui cumparator
+    Race r1(2020,300,"diesel");
+    r1.getFuelType2();
+    r1.getSpeedMin();
+    r1.getYear();
+    Race r2;
+    r2.setSpeed(370);
+    r2.setFuelType2("gasoline");
+    r2.setYear(2022);
+
     int x;
+    x=1;
     do {
         cout<<"1.Verificam daca masina poate participa la cursa"<<endl;
         cout<<"2.Verificam daca masina se inadreaza in cerintele unui cumparator"<<endl;
-        cin>>x;
         if(x==1)
-            cursa();
+        {cursa(); x=2;}
         if(x==2)
-           cumparare();
+        {cumparare();x=3;}
     }while(x==1 || x==2);
 }
